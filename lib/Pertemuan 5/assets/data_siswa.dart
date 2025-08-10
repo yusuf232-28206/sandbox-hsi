@@ -1,0 +1,1 @@
+var siswa = ['Budi', 'Siti'];
