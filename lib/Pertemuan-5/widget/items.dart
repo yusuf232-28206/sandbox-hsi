@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pertemuan%205/model/model.dart';
-import 'package:flutter_app/Pertemuan%205/widget/components.dart';
+import 'package:flutter_app/Pertemuan-5/model/model.dart';
+import 'package:flutter_app/Pertemuan-5/widget/components.dart';
 
 class EditSiswa extends StatelessWidget {
   const EditSiswa({super.key, required this.nama, required this.onChanged});

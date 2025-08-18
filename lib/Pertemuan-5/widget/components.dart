@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pertemuan%205/controller/validator.dart';
-import 'package:flutter_app/Pertemuan%205/model/model.dart';
+import 'package:flutter_app/Pertemuan-5/controller/validator.dart';
+import 'package:flutter_app/Pertemuan-5/model/model.dart';
 
 // tombol konfirmasi tambah
 
