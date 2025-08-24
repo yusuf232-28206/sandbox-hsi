@@ -22,6 +22,13 @@ ListTile tiles(IconData icon, Widget teks, Color color, void Function()? tap) {
   );
 }
 
+InkWell viewbutton(bool view, void Function()? onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: Icon(view ? Icons.visibility_off_rounded : Icons.visibility_rounded),
+  );
+}
+
 IconButton close(void Function()? onPressed) {
   return IconButton.filled(
     style: closebutton,

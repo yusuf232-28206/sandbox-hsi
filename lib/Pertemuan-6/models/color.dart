@@ -9,6 +9,7 @@ Color darkgrey = Color.fromRGBO(130, 125, 137, 1);
 
 ThemeData themecolor() {
   return ThemeData(
+    platform: TargetPlatform.android,
     scaffoldBackgroundColor: Colors.white,
     filledButtonTheme: FilledButtonThemeData(
       style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(primary)),

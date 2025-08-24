@@ -4,11 +4,25 @@ import 'package:flutter_app/Pertemuan-6/models/color.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/style.dart';
 
-TextFormField form(TextEditingController controller, Widget teks) {
-  return TextFormField(
-    controller: controller,
-    decoration: InputDecoration(hint: teks, border: OutlineInputBorder()),
-    validator: validator,
+Form form(
+  Key? key,
+  TextEditingController controller,
+  Widget teks, {
+  bool view = false,
+  Widget? inkwell,
+}) {
+  return Form(
+    key: key,
+    child: TextFormField(
+      controller: controller,
+      obscureText: view,
+      decoration: InputDecoration(
+        hint: teks,
+        border: OutlineInputBorder(),
+        suffixIcon: inkwell,
+      ),
+      validator: validator,
+    ),
   );
 }
 
@@ -17,7 +31,7 @@ TextField notetitle(TextEditingController title) {
     style: titlestyle,
     controller: title,
     decoration: InputDecoration(
-      hint: header1(color: darkgrey, 'Title'),
+      hint: header1('Title', align: TextAlign.justify, color: darkgrey),
       border: OutlineInputBorder(borderSide: BorderSide.none),
     ),
   );

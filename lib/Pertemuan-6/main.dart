@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_app/Pertemuan-6/models/color.dart';
-import 'package:flutter_app/Pertemuan-6/views/home/home.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/models/app/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -13,7 +12,8 @@ late Database db;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // aktifkan jika dijalankan di desktop
+  // aktifkan apabila
+  // dijalankan di desktop
   //
   // databaseFactory = databaseFactoryFfi;
 
@@ -40,23 +40,5 @@ void main() async {
       )
       ''');
 
-  runApp(
-    MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => X())],
-      child: Mains(),
-    ),
-  );
-}
-
-class Mains extends StatelessWidget {
-  const Mains({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: themecolor(),
-      debugShowMaterialGrid: false,
-      home: Home(page: homepage()),
-    );
-  }
+  runApp(BlocProvider(create: (_) => PageBloc(), child: Main()));
 }

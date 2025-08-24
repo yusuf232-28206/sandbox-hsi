@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/models/color.dart';
 
-Text header1(String teks, {Color? color = Colors.black}) {
+Text header1(
+  String teks, {
+  Color? color = Colors.black,
+  TextAlign? align = TextAlign.center,
+}) {
   return Text(
+    textAlign: align,
     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: color),
     teks,
   );
@@ -36,6 +41,7 @@ Text buttontext(String teks) {
 
 Text cardtitle(String teks) {
   return Text(
+    textAlign: TextAlign.left,
     style: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
