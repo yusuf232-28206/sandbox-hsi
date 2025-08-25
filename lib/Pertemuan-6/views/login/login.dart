@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
 import 'package:flutter_app/Pertemuan-6/models/color.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/components.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/forms.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/widget.dart';
 import 'package:flutter_app/Pertemuan-6/services/database.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
                       Center(child: CircularProgressIndicator(color: primary)),
                 );
 
-                await Future.delayed(Durations.extralong4);
+                await delay(1000);
 
                 var notValid = await loginAccount(email.text, password.text);
 
@@ -85,9 +85,7 @@ class _LoginState extends State<Login> {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      Future.delayed(
-                        Durations.medium4,
-                      ).then((value) => Navigator.pop(context));
+                      delay(400).then((value) => Navigator.pop(context));
 
                       return dialog([
                         header1('Username atau Password salah', color: primary),
@@ -96,9 +94,10 @@ class _LoginState extends State<Login> {
                   );
                 } else if (keys()) {
                   log('berhasil');
-                  context.read<PageBloc>().add(GoToMainMenuPage());
+                  router(context, GoToMainMenuPage());
                 }
               }),
+
               SizedBox(height: 32),
 
               // Text Button
@@ -107,9 +106,7 @@ class _LoginState extends State<Login> {
                 children: [
                   header2(neutral, "Don't have any account?"),
                   TextButton(
-                    onPressed: () {
-                      context.read<PageBloc>().add(GoToRegisterPage());
-                    },
+                    onPressed: () => router(context, GoToRegisterPage()),
                     child: header2(primary, 'Register here'),
                   ),
                 ],

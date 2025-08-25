@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
 import 'package:flutter_app/Pertemuan-6/models/color.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/components.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/forms.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/widget.dart';
 import 'package:flutter_app/Pertemuan-6/services/database.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -34,7 +34,8 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: back(() => context.read<PageBloc>().add(GoToLoginPage())),
+      appBar: back(() => router(context, GoToLoginPage())),
+
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -84,7 +85,7 @@ class _RegistrationState extends State<Registration> {
                   },
                 );
 
-                await Future.delayed(Duration(seconds: 1));
+                await delay(1000);
 
                 final account = await getAccount(name.text, email.text);
 
@@ -97,9 +98,7 @@ class _RegistrationState extends State<Registration> {
                         dialog(align: MainAxisAlignment.spaceBetween, [
                           header2(primary, 'Nama/Email telah terdaftar'),
                           regular('Silahkan login'),
-                          button('Ok', () {
-                            Navigator.pop(context);
-                          }),
+                          button('Ok', () => Navigator.pop(context)),
                         ]),
                   );
                 } else if (keys()) {
@@ -109,12 +108,12 @@ class _RegistrationState extends State<Registration> {
                         dialog([header1('Berhasil', color: primary)]),
                   );
 
-                  await Future.delayed(Durations.short4);
+                  await delay(200);
                   insertAccount(name.text, email.text, password.text);
                   Navigator.pop(context);
-                  await Future.delayed(Durations.short2);
+                  await delay(100);
 
-                  context.read<PageBloc>().add(GoToLoginPage());
+                  router(context, GoToLoginPage());
                 }
               }),
               SizedBox(height: 32),
@@ -125,9 +124,7 @@ class _RegistrationState extends State<Registration> {
                 children: [
                   header2(neutral, 'Already have an account?'),
                   TextButton(
-                    onPressed: () {
-                      context.read<PageBloc>().add(GoToLoginPage());
-                    },
+                    onPressed: () => router(context, GoToLoginPage()),
                     child: header2(primary, 'Login here'),
                   ),
                 ],

@@ -9,7 +9,6 @@ import 'package:flutter_app/Pertemuan-6/views/login/login.dart';
 import 'package:flutter_app/Pertemuan-6/views/menus/notes.dart';
 import 'package:flutter_app/Pertemuan-6/views/register/registration.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

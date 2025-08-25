@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
 import 'package:flutter_app/Pertemuan-6/models/color.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 Scaffold homepage(BuildContext context) {
   return Scaffold(
@@ -53,9 +52,9 @@ Scaffold homepage(BuildContext context) {
             dialog([header1('Harap login terlebih dahulu', color: primary)]),
       );
 
-      await Future.delayed(Durations.short1);
-      context.read<PageBloc>().add(GoToLoginPage());
-      await Future.delayed(Durations.short4);
+      await delay(100);
+      router(context, GoToLoginPage());
+      await delay(200);
       Navigator.pop(context);
     }),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

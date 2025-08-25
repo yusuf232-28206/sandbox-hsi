@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/widget.dart';
 import 'package:flutter_app/Pertemuan-6/services/database.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 Scaffold mainmenu(List<Notes> notes, BuildContext context) {
   return Scaffold(
@@ -21,8 +20,8 @@ Scaffold mainmenu(List<Notes> notes, BuildContext context) {
             children: List.generate(notes.length, (index) {
               return card(
                 cardnote(
-                  () =>
-                      context.read<PageBloc>().add(GoToNotesPage(notes[index])),
+                  () => router(context, GoToNotesPage(notes[index])),
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -41,11 +40,9 @@ Scaffold mainmenu(List<Notes> notes, BuildContext context) {
     ),
 
     // FAB
-    floatingActionButton: floatingbutton(() {
-      context.read<PageBloc>().add(
-        GoToNotesPage(Notes(title: '', content: '')),
-      );
-    }),
+    floatingActionButton: floatingbutton(
+      () => router(context, GoToNotesPage(Notes(title: '', content: ''))),
+    ),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
   );
 }

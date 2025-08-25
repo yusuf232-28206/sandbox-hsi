@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan-6/controllers/bloc/page_bloc.dart';
+import 'package:flutter_app/Pertemuan-6/controllers/controller.dart';
 import 'package:flutter_app/Pertemuan-6/models/color.dart';
 import 'package:flutter_app/Pertemuan-6/models/font.dart';
 import 'package:flutter_app/Pertemuan-6/models/widgets/components.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_app/Pertemuan-6/models/widgets/forms.dart';
 
 import 'package:flutter_app/Pertemuan-6/models/widgets/widget.dart';
 import 'package:flutter_app/Pertemuan-6/services/database.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Note extends StatefulWidget {
   const Note({super.key, required this.notevalue});
@@ -37,7 +37,7 @@ class _NoteState extends State<Note> {
   Widget build(BuildContext context) {
     return Scaffold(
       // Appbar
-      appBar: back(() => context.read<PageBloc>().add(GoToMainMenuPage())),
+      appBar: back(() => router(context, GoToMainMenuPage())),
 
       // Body
       body: SingleChildScrollView(
@@ -64,11 +64,13 @@ class _NoteState extends State<Note> {
                 onPressed: () {
                   // Modal Bottom Sheet
                   showModalBottomSheet(
-                    constraints: BoxConstraints(minWidth: double.maxFinite),
+                    constraints: BoxConstraints(
+                      minWidth: double.maxFinite,
+                      maxHeight: MediaQuery.of(context).size.height / 3,
+                    ),
                     context: context,
                     builder: (context) => Container(
                       padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-                      height: MediaQuery.of(context).size.height / 4,
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -92,9 +94,7 @@ class _NoteState extends State<Note> {
                                     ),
                                   );
                                   Navigator.pop(context);
-                                  context.read<PageBloc>().add(
-                                    GoToMainMenuPage(),
-                                  );
+                                  router(context, GoToMainMenuPage());
                                 } else {
                                   updateNote(
                                     Notes(
@@ -104,16 +104,14 @@ class _NoteState extends State<Note> {
                                     ),
                                   );
                                   Navigator.pop(context);
-                                  context.read<PageBloc>().add(
-                                    GoToMainMenuPage(),
-                                  );
+                                  router(context, GoToMainMenuPage());
                                 }
 
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    Future.delayed(
-                                      Durations.extralong4,
+                                    delay(
+                                      1000,
                                     ).then((value) => Navigator.pop(context));
                                     return Center(
                                       child: CircularProgressIndicator(
@@ -138,15 +136,13 @@ class _NoteState extends State<Note> {
                                 }
 
                                 Navigator.pop(context);
-                                context.read<PageBloc>().add(
-                                  GoToMainMenuPage(),
-                                );
+                                router(context, GoToMainMenuPage());
 
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    Future.delayed(
-                                      Durations.extralong4,
+                                    delay(
+                                      1000,
                                     ).then((value) => Navigator.pop(context));
                                     return Center(
                                       child: CircularProgressIndicator(
